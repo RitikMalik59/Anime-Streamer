@@ -33,6 +33,7 @@ const Home = () => {
           <h2>Trending Anime</h2>
           <Button variant="primary">View All</Button>
         </div>
+
         {loading ? (
           <div className="d-flex justify-content-center">
             <Spinner animation="border" variant="primary" />
