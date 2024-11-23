@@ -18,9 +18,7 @@ const NavigationBar = () => {
             <Link to="/Page" className="nav-link">
               Page
             </Link>
-            {/* <Link to="/*" className="nav-link">
-              NoPage
-            </Link> */}
+
             {/* Add more Nav Links as you build more pages */}
           </Nav>
         </Navbar.Collapse>

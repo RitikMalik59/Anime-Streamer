@@ -24,7 +24,7 @@ const App = () => {
             </>
           }
         />
-        <Route path="/*" element={<NoPage />} />
+        {/* <Route path="/*" element={<NoPage />} /> */}
         {/* Future routes can be added here */}
       </Routes>
     </Router>

@@ -8,9 +8,12 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 - [ ] Home Page
-  - [ ] Navbar
-  - [ ] Banner
-  - [ ] Card listing
+  - [x] Navbar
+  - [x] Banner
+  - [x] Card listing
+  - [x] Routing between pages
+  - [ ] Swiper js
+  - [ ]
 -
 - [ ] View Detailed Anime
   - [ ] Build UI
