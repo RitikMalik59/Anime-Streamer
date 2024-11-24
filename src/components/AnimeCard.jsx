@@ -2,8 +2,14 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 import "../customCSS/AnimeCard.css";
+import { useNavigate } from "react-router-dom";
 
 const AnimeCard = ({ anime }) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/anime/${anime.mal_id}`, { state: { anime } });
+  };
   const truncateText = (text, maxLength) => {
     if (!text) return "No synopsis available";
     return text.length > maxLength
@@ -11,10 +17,14 @@ const AnimeCard = ({ anime }) => {
       : text;
   };
 
-  //   console.log(anime);
+  console.log(anime);
 
   return (
-    <Card className="anime-card">
+    <Card
+      className="anime-card"
+      onClick={handleClick}
+      style={{ cursor: "pointer" }}
+    >
       <div className="anime-image-wrapper">
         <Card.Img
           variant="top"

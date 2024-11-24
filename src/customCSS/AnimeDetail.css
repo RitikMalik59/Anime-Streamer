@@ -1,0 +1,92 @@
+/* src/pages/AnimeDetail.css */
+.anime-detail {
+  color: #fff;
+  min-height: 100vh;
+  display: flex; /* Keeps everything aligned vertically */
+  flex-direction: column;
+}
+
+.anime-banner {
+  position: relative;
+  background-size: cover; /* Ensures the image fills the banner */
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 500px;
+  display: flex;
+  align-items: center; /* Centers the overlay vertically */
+  justify-content: flex-start; /* Aligns details to the left */
+  overflow: hidden;
+}
+
+.anime-overlay {
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.85) 30%,
+    transparent 100%
+  );
+  padding: 5rem;
+  max-width: 600px; /* Sets a max width */
+  width: 90%; /* Adapts to smaller screens */
+  box-sizing: border-box; /* Ensures padding is included */
+}
+
+.anime-title {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.anime-genres,
+.anime-score {
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+}
+
+.anime-synopsis {
+  margin-top: 1rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .anime-banner {
+    height: 400px;
+  }
+
+  .anime-overlay {
+    padding: 1.5rem;
+    max-width: 80%; /* Widens the content area */
+  }
+
+  .anime-title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .anime-banner {
+    height: 300px;
+  }
+
+  .anime-overlay {
+    padding: 1rem;
+    max-width: 100%; /* Takes full width on mobile */
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.4) 50%,
+      transparent 100%
+    ); /* Adjusts gradient direction */
+  }
+
+  .anime-title {
+    font-size: 2rem;
+  }
+
+  .anime-genres,
+  .anime-score,
+  .anime-synopsis {
+    font-size: 0.9rem;
+  }
+}

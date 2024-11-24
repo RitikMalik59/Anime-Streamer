@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavigationBar from "./components/Navbar";
 import Home from "./pages/Home";
 import Banner from "./components/Banner";
+import AnimeDetail from "./pages/AnimeDetail";
 import NoPage from "./pages/NoPage";
 
 const App = () => {
@@ -15,6 +16,7 @@ const App = () => {
       </div> */}
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/anime/:id" element={<AnimeDetail />} />
         <Route
           path="/page"
           element={
