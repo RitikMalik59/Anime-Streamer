@@ -16,4 +16,8 @@ Currently, two official plugins are available:
   - [ ]
 -
 - [ ] View Detailed Anime
+
   - [ ] Build UI
+
+- [ ] Genre in navigation on hover show genre list
+- [ ]
