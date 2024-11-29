@@ -7,7 +7,7 @@ const ViewAllButton = ({ listingType }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/${listingType}`);
+    navigate(`/animeListing/${listingType}`);
   };
 
   return (

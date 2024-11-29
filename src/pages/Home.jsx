@@ -22,11 +22,7 @@ const Home = () => {
   const [trendingAnime, setTrendingAnime] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const navigate = useNavigate();
-  const handleViewAll = () => {
-    navigate(`/listing/`, { state: { trendingAnime } });
-    // console.log("click");
-  };
+
 
   useEffect(() => {
     // Fetch trending anime from Jikan API
@@ -54,7 +50,6 @@ const Home = () => {
           {/* <Button variant="primary" onClick={handleViewAll}>
             View All
           </Button> */}
-          {/* <ViewAllButton listingType="trending" /> */}
           <ViewAllButton listingType="trending" />
           <ViewAllButton listingType="popular" />
           <ViewAllButton listingType="ongoing" />

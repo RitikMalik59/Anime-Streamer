@@ -1,6 +1,6 @@
 // src/pages/AnimeListing.jsx
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import AnimeCard from "../components/AnimeCard";
 import Banner from "../components/Banner";
@@ -10,6 +10,8 @@ const AnimeListing = () => {
   const { listingType } = useParams();
   const [animeList, setAnimeList] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+  //   console.log("nopage");
 
   useEffect(() => {
     const fetchAnimeList = async () => {
@@ -20,6 +22,8 @@ const AnimeListing = () => {
         else if (listingType === "popular")
           endpoint = "/anime"; // Add filters as needed
         else if (listingType === "ongoing") endpoint = "/seasons/now";
+        else navigate(`/${listingType}/404`);
+
         const response = await axios.get(`https://api.jikan.moe/v4${endpoint}`);
         setAnimeList(response.data.data);
       } catch (error) {

@@ -20,7 +20,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/search" element={<Search />} />
         <Route path="/anime/:id" element={<AnimeDetail />} />
-        <Route path="/:listingType" element={<AnimeListing />} />
+        <Route path="/animeListing/:listingType" element={<AnimeListing />} />
         <Route
           path="/page"
           element={
@@ -30,7 +30,7 @@ const App = () => {
             </>
           }
         />
-        {/* <Route path="/*" element={<NoPage />} /> */}
+        <Route path="/*" element={<NoPage />} />
         {/* Future routes can be added here */}
       </Routes>
     </Router>
