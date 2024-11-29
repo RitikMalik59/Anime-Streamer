@@ -15,6 +15,9 @@ const NavigationBar = () => {
             <Link to="/" className="nav-link">
               Home
             </Link>
+            <Link to="/search" className="nav-link">
+              Search
+            </Link>
             <Link to="/Page" className="nav-link">
               Page
             </Link>

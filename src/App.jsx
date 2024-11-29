@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavigationBar from "./components/Navbar";
 import Home from "./pages/Home";
 import Banner from "./components/Banner";
+import Search from "./components/Search"; // Adjust path as needed
 import AnimeDetail from "./pages/AnimeDetail";
 import NoPage from "./pages/NoPage";
 
@@ -16,6 +17,7 @@ const App = () => {
       </div> */}
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/search" element={<Search />} />
         <Route path="/anime/:id" element={<AnimeDetail />} />
         <Route
           path="/page"

@@ -21,7 +21,7 @@ const AnimeCard = ({ anime }) => {
 
   return (
     <Card
-      className="anime-card"
+      className=""
       onClick={handleClick}
       style={{ cursor: "pointer" }}
     >

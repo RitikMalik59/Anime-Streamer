@@ -12,12 +12,15 @@ Currently, two official plugins are available:
   - [x] Banner
   - [x] Card listing
   - [x] Routing between pages
-  - [ ] Swiper js
-  - [ ]
--
-- [ ] View Detailed Anime
+  - [x] Swiper js
+  - [ ] 
 
-  - [ ] Build UI
+- [ ] View all page
+- [ ] 
+-
+- [x] View Detailed Anime
+
+  - [x] Build UI
 
 - [ ] Genre in navigation on hover show genre list
-- [ ]
+- [ ] Search bar
