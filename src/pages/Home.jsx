@@ -1,3 +1,14 @@
+// import Swiper core and required modules
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+
 // src/pages/Home.jsx
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Button, Spinner } from "react-bootstrap";
@@ -39,13 +50,37 @@ const Home = () => {
             <Spinner animation="border" variant="primary" />
           </div>
         ) : (
-          <Row xs={1} sm={2} md={3} lg={4} className="g-4">
-            {trendingAnime.map((anime) => (
-              <Col key={anime.mal_id}>
+          <Swiper
+            // install Swiper modules
+            modules={[Navigation, Scrollbar, A11y]}
+            spaceBetween={20}
+            slidesPerView={1}
+            breakpoints={{
+              640: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+              },
+              768: {
+                slidesPerView: 3,
+                spaceBetween: 40,
+              },
+              1024: {
+                slidesPerView: 4,
+                spaceBetween: 50,
+              },
+            }}
+            navigation
+            pagination={{ clickable: true }}
+            scrollbar={{ draggable: true }}
+            onSwiper={(swiper) => console.log(swiper)}
+            onSlideChange={() => console.log("slide change")}
+          >
+            {trendingAnime.slice(0, 10).map((anime, index) => (
+              <SwiperSlide key={anime.mal_id} virtualIndex={index}>
                 <AnimeCard anime={anime} />
-              </Col>
+              </SwiperSlide>
             ))}
-          </Row>
+          </Swiper>
         )}
       </Container>
     </div>
