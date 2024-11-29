@@ -6,6 +6,7 @@ import Banner from "./components/Banner";
 import Search from "./components/Search"; // Adjust path as needed
 import AnimeDetail from "./pages/AnimeDetail";
 import NoPage from "./pages/NoPage";
+import AnimeListing from "./pages/AnimeListing"; // Create this component
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/search" element={<Search />} />
         <Route path="/anime/:id" element={<AnimeDetail />} />
+        <Route path="/:listingType" element={<AnimeListing />} />
         <Route
           path="/page"
           element={

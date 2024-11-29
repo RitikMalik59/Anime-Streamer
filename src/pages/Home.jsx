@@ -15,10 +15,18 @@ import { Container, Row, Col, Button, Spinner } from "react-bootstrap";
 import axios from "axios";
 import Banner from "../components/Banner";
 import AnimeCard from "../components/AnimeCard";
+import ViewAllButton from "../components/ViewAllButton";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [trendingAnime, setTrendingAnime] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const navigate = useNavigate();
+  const handleViewAll = () => {
+    navigate(`/listing/`, { state: { trendingAnime } });
+    // console.log("click");
+  };
 
   useEffect(() => {
     // Fetch trending anime from Jikan API
@@ -43,7 +51,13 @@ const Home = () => {
       <Container className="my-5">
         <div className="d-flex justify-content-between align-items-center mb-4">
           <h2>Trending Anime</h2>
-          <Button variant="primary">View All</Button>
+          {/* <Button variant="primary" onClick={handleViewAll}>
+            View All
+          </Button> */}
+          {/* <ViewAllButton listingType="trending" /> */}
+          <ViewAllButton listingType="trending" />
+          <ViewAllButton listingType="popular" />
+          <ViewAllButton listingType="ongoing" />
         </div>
 
         {loading ? (
