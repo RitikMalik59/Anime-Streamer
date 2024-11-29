@@ -61,14 +61,17 @@ const AnimeDetail = () => {
     return <div className="text-danger text-center my-5">{error}</div>;
   }
 
-  console.log(episodes);
+  // console.log(episodes);
 
   return (
     <div className="anime-detail bg-black">
       <div
         className="anime-banner"
         style={{
-          backgroundImage: `url(${anime.trailer.images.maximum_image_url})`,
+          backgroundImage: `url(${
+            anime.trailer.images.maximum_image_url ||
+            anime.images.jpg.large_image_url
+          })`,
         }}
       >
         <div className="anime-overlay">
