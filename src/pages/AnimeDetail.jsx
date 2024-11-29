@@ -10,6 +10,7 @@ const AnimeDetail = () => {
   const [anime, setAnime] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [episodes, setEpisodes] = useState([]);
 
   useEffect(() => {
     const fetchAnimeDetail = async () => {
@@ -31,6 +32,21 @@ const AnimeDetail = () => {
     fetchAnimeDetail();
   }, [id]);
 
+  useEffect(() => {
+    const fetchEpisodes = async () => {
+      try {
+        const response = await axios.get(
+          `https://api.jikan.moe/v4/anime/${id}/episodes`
+        );
+        setEpisodes(response.data.data); // Adjust based on API structure
+      } catch (error) {
+        console.error("Error fetching episodes:", error);
+      }
+    };
+
+    fetchEpisodes();
+  }, [id]);
+
   if (loading) {
     return (
       <Spinner
@@ -44,6 +60,8 @@ const AnimeDetail = () => {
   if (error) {
     return <div className="text-danger text-center my-5">{error}</div>;
   }
+
+  console.log(episodes);
 
   return (
     <div className="anime-detail bg-black">
@@ -107,6 +125,32 @@ const AnimeDetail = () => {
             </p>
           </Col>
         </Row>
+      </Container>
+
+      {/* Episodes Section */}
+      <Container className="anime-episodes-section mt-4">
+        <h2>Episodes</h2>
+        {episodes.length > 0 ? (
+          <ul className="episode-list">
+            {episodes.map((episode) => (
+              <li key={episode.mal_id} className="episode-item">
+                {anime.images && anime.images.jpg.image_url && (
+                  <img
+                    src={anime.images.jpg.image_url}
+                    alt={`Episode ${episode.mal_id}`}
+                    className="episode-image"
+                  />
+                )}
+                <div className="episode-details">
+                  <strong>Episode {episode.mal_id}:</strong>{" "}
+                  {episode.title || "No Title"}
+                </div>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No episodes available</p>
+        )}
       </Container>
 
       {/* Trailer Section */}
