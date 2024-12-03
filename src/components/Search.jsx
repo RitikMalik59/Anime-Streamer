@@ -86,7 +86,7 @@ const Search = () => {
               <Container className="my-5">
                 <div className="d-flex justify-content-between align-items-center mb-4">
                   <h2>Searched Anime</h2>
-                  <Button variant="primary">View All</Button>
+                  {/* <Button variant="primary">View All</Button> */}
                 </div>
 
                 {loading ? (

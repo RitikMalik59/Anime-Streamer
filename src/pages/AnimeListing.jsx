@@ -5,27 +5,30 @@ import axios from "axios";
 import AnimeCard from "../components/AnimeCard";
 import Banner from "../components/Banner";
 import { Container, Row, Col, Button, Spinner } from "react-bootstrap";
+import config from "../config";
 
 const AnimeListing = () => {
-  const { listingType } = useParams();
+  const { listingType, current } = useParams();
   const [animeList, setAnimeList] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  //   console.log("nopage");
 
   useEffect(() => {
     const fetchAnimeList = async () => {
       setLoading(true);
       try {
         let endpoint;
-        if (listingType === "trending") endpoint = "/top/anime";
-        else if (listingType === "popular")
-          endpoint = "/anime"; // Add filters as needed
-        else if (listingType === "ongoing") endpoint = "/seasons/now";
-        else navigate(`/${listingType}/404`);
+        if (listingType && current) endpoint = `${listingType}/${current}`;
+        else if (listingType) endpoint = `${listingType}`; // Add filters as needed
+        // else if (listingType === "ongoing") endpoint = "/seasons/now";
+        // else navigate(`/${listingType}/404`);
 
-        const response = await axios.get(`https://api.jikan.moe/v4${endpoint}`);
+        const apiUrl = `${config.API_URL}${endpoint}`;
+        console.log(apiUrl);
+
+        const response = await axios.get(apiUrl);
         setAnimeList(response.data.data);
+        console.log(animeList);
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {

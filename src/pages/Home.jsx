@@ -17,12 +17,12 @@ import Banner from "../components/Banner";
 import AnimeCard from "../components/AnimeCard";
 import ViewAllButton from "../components/ViewAllButton";
 import { useNavigate } from "react-router-dom";
+import config from "../config";
+import AnimeSlider from "../components/AnimeSlider";
 
 const Home = () => {
   const [trendingAnime, setTrendingAnime] = useState([]);
   const [loading, setLoading] = useState(true);
-
-
 
   useEffect(() => {
     // Fetch trending anime from Jikan API
@@ -41,59 +41,14 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <>
       {/* Banner Component*/}
       <Banner />
-      <Container className="my-5">
-        <div className="d-flex justify-content-between align-items-center mb-4">
-          <h2>Trending Anime</h2>
-          {/* <Button variant="primary" onClick={handleViewAll}>
-            View All
-          </Button> */}
-          <ViewAllButton listingType="trending" />
-          <ViewAllButton listingType="popular" />
-          <ViewAllButton listingType="ongoing" />
-        </div>
-
-        {loading ? (
-          <div className="d-flex justify-content-center">
-            <Spinner animation="border" variant="primary" />
-          </div>
-        ) : (
-          <Swiper
-            // install Swiper modules
-            modules={[Navigation, Scrollbar, A11y]}
-            spaceBetween={20}
-            slidesPerView={1}
-            breakpoints={{
-              640: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-              },
-              768: {
-                slidesPerView: 3,
-                spaceBetween: 40,
-              },
-              1024: {
-                slidesPerView: 4,
-                spaceBetween: 50,
-              },
-            }}
-            navigation
-            pagination={{ clickable: true }}
-            scrollbar={{ draggable: true }}
-            onSwiper={(swiper) => console.log(swiper)}
-            onSlideChange={() => console.log("slide change")}
-          >
-            {trendingAnime.slice(0, 10).map((anime, index) => (
-              <SwiperSlide key={anime.mal_id} virtualIndex={index}>
-                <AnimeCard anime={anime} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        )}
-      </Container>
-    </div>
+      <AnimeSlider categoryURL="seasons/now" animeTitle="Ongoing Anime" />
+      <AnimeSlider categoryURL="top/anime" animeTitle="Trending Anime" />
+      <AnimeSlider categoryURL="anime" animeTitle="Popular Anime" />
+      <AnimeSlider categoryURL="seasons/upcoming" animeTitle="Upcoming Anime" />
+    </>
   );
 };
 
