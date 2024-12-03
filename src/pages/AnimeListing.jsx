@@ -40,20 +40,6 @@ const AnimeListing = () => {
   }, [listingType]);
 
   return (
-    // <div className="anime-listing-page">
-    //   <h1 className="text-light text-center">
-    //     {listingType.toUpperCase()} Anime
-    //   </h1>
-    //   {loading ? (
-    //     <p>Loading...</p>
-    //   ) : (
-    //     <div>
-    //       {animeList.map((anime) => (
-    //         <AnimeCard anime={anime} />
-    //       ))}
-    //     </div>
-    //   )}
-    // </div>
 
     <div>
       <Banner />
