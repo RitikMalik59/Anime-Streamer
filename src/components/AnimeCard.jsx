@@ -17,7 +17,7 @@ const AnimeCard = ({ anime }) => {
       : text;
   };
 
-  console.log(anime);
+  // console.log(anime);
 
   return (
     <Card

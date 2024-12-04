@@ -1,5 +1,5 @@
 // src/pages/Home.jsx
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { Container, Row, Col, Button, Spinner } from "react-bootstrap";
 import axios from "axios";
 import AnimeCard from "../components/AnimeCard";
@@ -20,7 +20,7 @@ const AnimeSlider = ({ categoryURL, animeTitle }) => {
   const [animeCategory, setAnimeCategory] = useState([]);
   const [loading, setLoading] = useState(true);
   const limit = 10;
-  //   console.log(categoryURL);
+  console.log(categoryURL);
 
   useEffect(() => {
     // Fetch trending anime from Jikan API
@@ -80,7 +80,7 @@ const AnimeSlider = ({ categoryURL, animeTitle }) => {
             onSlideChange={() => console.log("slide change")}
           >
             {animeCategory.map((anime, index) => (
-              <SwiperSlide key={anime.mal_id} virtualIndex={index}>
+              <SwiperSlide key={index} virtualIndex={index}>
                 <AnimeCard anime={anime} />
               </SwiperSlide>
             ))}
@@ -91,4 +91,4 @@ const AnimeSlider = ({ categoryURL, animeTitle }) => {
   );
 };
 
-export default AnimeSlider;
+export default memo(AnimeSlider);
