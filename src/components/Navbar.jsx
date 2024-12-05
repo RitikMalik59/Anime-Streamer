@@ -9,6 +9,7 @@ import {
   Button,
 } from "react-bootstrap";
 import { Link, Outlet, useNavigate } from "react-router-dom";
+import ThemeToggleButton from "./ThemeToggleButton";
 
 const NavigationBar = () => {
   const [query, setQuery] = useState("");
@@ -37,6 +38,7 @@ const NavigationBar = () => {
             {/* <Link to="/Page" className="nav-link">
               Page
             </Link> */}
+            <ThemeToggleButton />
 
             {/* Add more Nav Links as you build more pages */}
           </Nav>

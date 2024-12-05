@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Button, Spinner } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { useTheme } from "../context/ThemeContext";
 import "../customCSS/AnimeDetail.css";
 
 const AnimeDetail = () => {
@@ -11,6 +12,9 @@ const AnimeDetail = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [episodes, setEpisodes] = useState([]);
+
+  const { theme, toggleTheme } = useTheme();
+  console.log(theme);
 
   useEffect(() => {
     const fetchAnimeDetail = async () => {
@@ -64,7 +68,7 @@ const AnimeDetail = () => {
   // console.log(episodes);
 
   return (
-    <div className="anime-detail bg-black">
+    <div className={`anime-detail ${theme}`}>
       <div
         className="anime-banner"
         style={{
@@ -87,7 +91,11 @@ const AnimeDetail = () => {
                 <Button variant="primary" className="me-3">
                   Watch Now
                 </Button>
-                <Button variant="outline-light">Add to Watchlist</Button>
+                <Button
+                  variant={`outline-${theme === "light" ? "dark" : "light"}`}
+                >
+                  Add to Watchlist
+                </Button>
               </Col>
             </Row>
           </Container>
@@ -95,7 +103,7 @@ const AnimeDetail = () => {
       </div>
 
       {/* Detailed Information Section */}
-      <Container className="anime-info-section mt-4">
+      <Container className={`anime-info-section mt-4 `}>
         <Row>
           <Col md={6}>
             <h2>Information</h2>
@@ -131,7 +139,7 @@ const AnimeDetail = () => {
       </Container>
 
       {/* Episodes Section */}
-      <Container className="anime-episodes-section mt-4">
+      <Container className={`anime-episodes-section mt-4 `}>
         <h2>Episodes</h2>
         {episodes.length > 0 ? (
           <ul className="episode-list">
@@ -157,7 +165,7 @@ const AnimeDetail = () => {
       </Container>
 
       {/* Trailer Section */}
-      <Container className="anime-trailer-section mt-5">
+      <Container className={`anime-trailer-section mt-5 `}>
         <h2>Trailer</h2>
         {anime.trailer.embed_url ? (
           <div className="video-container">

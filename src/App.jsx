@@ -7,15 +7,16 @@ import Search from "./components/Search"; // Adjust path as needed
 import AnimeDetail from "./pages/AnimeDetail";
 import NoPage from "./pages/NoPage";
 import AnimeListing from "./pages/AnimeListing"; // Create this component
+// import { ThemeProvider } from "./context/ThemeContext";
 
 const App = () => {
   return (
     <Router>
       <NavigationBar />
       {/* <div>
-        <Link to="/">Home</Link>
-        <Link to="/page">Page</Link>
-      </div> */}
+            <Link to="/">Home</Link>
+            <Link to="/page">Page</Link>
+          </div> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/search" element={<Search />} />
