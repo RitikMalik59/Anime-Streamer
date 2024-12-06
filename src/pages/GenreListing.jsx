@@ -3,7 +3,8 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Container, Row, Col, Spinner, Alert } from "react-bootstrap";
-import "../customCSS/GenreListing.css"; // Import custom styles
+import Banner from "../components/Banner";
+import AnimeCard from "../components/AnimeCard";
 
 const GenreListing = () => {
   const { genreId, genreName } = useParams(); // Capture genreId and genreName from route
@@ -50,26 +51,28 @@ const GenreListing = () => {
   }
 
   return (
-    <Container className="my-5">
-      <h1 className="mb-4 text-center">Anime under {genreName}</h1>
-      <Row>
-        {animeList.map((anime) => (
-          <Col md={3} sm={6} xs={12} key={anime.mal_id} className="mb-4">
-            <div className="anime-card">
-              <img
-                src={anime.images.jpg.large_image_url}
-                alt={anime.title}
-                className="anime-image img-fluid rounded"
-              />
-              <div className="anime-card-body">
-                <h5 className="anime-title">{anime.title}</h5>
-                <p className="anime-score">⭐ {anime.score || "N/A"}</p>
-              </div>
-            </div>
-          </Col>
-        ))}
-      </Row>
-    </Container>
+    <>
+      <Banner />
+      <Container className="my-5">
+        <div className="d-flex justify-content-between align-items-center mb-4">
+          <h2>Anime under {genreName}</h2>
+          {/* <Button variant="primary">View All</Button> */}
+        </div>
+        {loading ? (
+          <div className="d-flex justify-content-center">
+            <Spinner animation="border" variant="primary" />
+          </div>
+        ) : (
+          <Row xs={1} sm={2} md={3} lg={4} className="g-4">
+            {animeList.map((anime) => (
+              <Col key={anime.mal_id}>
+                <AnimeCard anime={anime} />
+              </Col>
+            ))}
+          </Row>
+        )}
+      </Container>
+    </>
   );
 };
 
