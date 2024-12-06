@@ -57,7 +57,9 @@ const NavigationBar = () => {
                 {genres.map((genre) => (
                   <Link
                     key={genre.mal_id}
-                    to={`/genre/${genre.mal_id}`}
+                    to={`/genre/${genre.mal_id}/${encodeURIComponent(
+                      genre.name
+                    )}`}
                     className="genre-item"
                   >
                     {genre.name}

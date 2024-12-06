@@ -40,8 +40,7 @@ const AnimeListing = () => {
   }, [listingType]);
 
   return (
-
-    <div>
+    <>
       <Banner />
       <Container className="my-5">
         <div className="d-flex justify-content-between align-items-center mb-4">
@@ -62,7 +61,7 @@ const AnimeListing = () => {
           </Row>
         )}
       </Container>
-    </div>
+    </>
   );
 };
 

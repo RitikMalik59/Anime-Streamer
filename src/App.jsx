@@ -7,7 +7,7 @@ import Search from "./components/Search"; // Adjust path as needed
 import AnimeDetail from "./pages/AnimeDetail";
 import NoPage from "./pages/NoPage";
 import AnimeListing from "./pages/AnimeListing"; // Create this component
-// import { ThemeProvider } from "./context/ThemeContext";
+import GenreListing from "./pages/GenreListing";
 
 const App = () => {
   return (
@@ -26,6 +26,7 @@ const App = () => {
           element={<AnimeListing />}
         />
         <Route path="/animeListing/:listingType/" element={<AnimeListing />} />
+        <Route path="/genre/:genreId/:genreName" element={<GenreListing />} />
         <Route
           path="/page"
           element={
