@@ -1,5 +1,5 @@
 // src/components/Navbar.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Navbar,
   Nav,
@@ -10,10 +10,27 @@ import {
 } from "react-bootstrap";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import ThemeToggleButton from "./ThemeToggleButton";
+import axios from "axios";
+import "../customCSS/Navbar.css"; // Custom CSS
 
 const NavigationBar = () => {
   const [query, setQuery] = useState("");
+  const [genres, setGenres] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchGenres = async () => {
+      try {
+        const response = await axios.get(
+          "https://api.jikan.moe/v4/genres/anime"
+        );
+        setGenres(response.data.data); // Update based on API response
+      } catch (error) {
+        console.error("Error fetching genres:", error);
+      }
+    };
+    fetchGenres();
+  }, []);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -32,6 +49,23 @@ const NavigationBar = () => {
             <Link to="/" className="nav-link">
               Home
             </Link>
+
+            {/* Genres Dropdown */}
+            <div className="nav-link genre-dropdown">
+              <span>Genres</span>
+              <div className="genre-dropdown-menu">
+                {genres.map((genre) => (
+                  <Link
+                    key={genre.mal_id}
+                    to={`/genre/${genre.mal_id}`}
+                    className="genre-item"
+                  >
+                    {genre.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
             {/* <Link to="/search" className="nav-link">
               Search
             </Link> */}

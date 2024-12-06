@@ -12,10 +12,10 @@ const Home = () => {
 
   useEffect(() => {
     // Staggered mounting with timeouts
-    setTimeout(() => setShowOngoing(true), 0); // Immediately
-    setTimeout(() => setShowTrending(true), 1000); // After 1 second
-    setTimeout(() => setShowPopular(true), 2000); // After 2 seconds
-    setTimeout(() => setShowUpcoming(true), 4000); // After 3 seconds
+    setTimeout(() => setShowOngoing(true), 1000); // 1 Immediately
+    setTimeout(() => setShowTrending(true), 2000); // After 2 second
+    setTimeout(() => setShowPopular(true), 3000); // After 3 seconds
+    setTimeout(() => setShowUpcoming(true), 5000); // After 5 seconds
   }, []);
 
   return (

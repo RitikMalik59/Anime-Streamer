@@ -1,0 +1,56 @@
+/* Navbar.css */
+
+/* Genre Dropdown Container */
+.genre-dropdown {
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .genre-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 5 columns in each row */
+    gap: 10px;
+    background-color: #444;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s, visibility 0.3s;
+    /* width: 100%; Full width dropdown */
+    max-height: 438px; /* Set a fixed height */
+    overflow-y: auto; /* Enable vertical scrolling if content exceeds height */
+  }
+  
+  /* Show the dropdown on hover */
+  .genre-dropdown:hover .genre-dropdown-menu {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  /* Genre Item Styling */
+  .genre-item {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    text-align: center;
+  }
+  
+  .genre-item:hover {
+    background: #555;
+    color: #ff9800;
+  }
+  
+  /* Mobile Friendly Adjustments */
+  @media (max-width: 768px) {
+    .genre-dropdown-menu {
+      grid-template-columns: repeat(2, 1fr); /* Reduce columns for smaller screens */
+    }
+  }
+  
