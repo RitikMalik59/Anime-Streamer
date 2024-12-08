@@ -41,6 +41,9 @@ const Search = () => {
         const response = await axios.get(
           `https://api.jikan.moe/v4/anime?q=${query}`
         );
+        if (results.length <= 0) {
+          setError("No search results found. Please try again.");
+        }
 
         setResults(response.data.data);
         // console.log(results);
