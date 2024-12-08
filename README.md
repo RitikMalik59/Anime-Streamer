@@ -12,7 +12,6 @@
 - **Genre Listings**: Explore anime by genres with a hover-based genre navigation.
 - **Dark/Light Mode**: Switch between dark and light modes for a personalized experience.
 - **Retry Logic for API**: Implements retry logic to handle API rate limits and ensure smooth functionality.
-- **Anime Watchlist**: Add anime to your watchlist (UI for future functionality).
 - **Trending, Popular, and Ongoing Anime**: Display trending, popular, and ongoing anime titles with pagination.
 
 ---
@@ -40,7 +39,7 @@
 
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/yourusername/anime-stream.git
+    git clone https://github.com/RitikMalik59/Anime-Streamer.git
     ```
 
 2. **Navigate to the project folder**:
@@ -115,8 +114,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Feel free to reach out if you have any questions or suggestions:
 
-- **Email**: your-email@example.com
-- **GitHub**: [Your GitHub](https://github.com/yourusername)
+- **Email**: ritikmalik59@gmail.com
+- **GitHub**: [RitikMalik59](https://github.com/RitikMalik59/)
 
 ---
 

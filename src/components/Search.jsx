@@ -41,7 +41,9 @@ const Search = () => {
         const response = await axios.get(
           `https://api.jikan.moe/v4/anime?q=${query}`
         );
+
         setResults(response.data.data);
+        // console.log(results);
       } catch (err) {
         setError("Failed to fetch search results. Please try again.");
         console.error("Error fetching search results:", err);
@@ -94,37 +96,44 @@ const Search = () => {
                     <Spinner animation="border" variant="primary" />
                   </div>
                 ) : (
-                  <Swiper
-                    // install Swiper modules
-                    modules={[Navigation, Scrollbar, A11y]}
-                    spaceBetween={20}
-                    slidesPerView={1}
-                    breakpoints={{
-                      640: {
-                        slidesPerView: 2,
-                        spaceBetween: 20,
-                      },
-                      768: {
-                        slidesPerView: 3,
-                        spaceBetween: 40,
-                      },
-                      1024: {
-                        slidesPerView: 4,
-                        spaceBetween: 50,
-                      },
-                    }}
-                    navigation
-                    pagination={{ clickable: true }}
-                    scrollbar={{ draggable: true }}
-                    onSwiper={(swiper) => console.log(swiper)}
-                    onSlideChange={() => console.log("slide change")}
-                  >
-                    {results.map((anime, index) => (
-                      <SwiperSlide key={anime.mal_id} virtualIndex={index}>
+                  // <Swiper
+                  //   // install Swiper modules
+                  //   modules={[Navigation, Scrollbar, A11y]}
+                  //   spaceBetween={20}
+                  //   slidesPerView={1}
+                  //   breakpoints={{
+                  //     640: {
+                  //       slidesPerView: 2,
+                  //       spaceBetween: 20,
+                  //     },
+                  //     768: {
+                  //       slidesPerView: 3,
+                  //       spaceBetween: 40,
+                  //     },
+                  //     1024: {
+                  //       slidesPerView: 4,
+                  //       spaceBetween: 50,
+                  //     },
+                  //   }}
+                  //   navigation
+                  //   pagination={{ clickable: true }}
+                  //   scrollbar={{ draggable: true }}
+                  //   onSwiper={(swiper) => console.log(swiper)}
+                  //   onSlideChange={() => console.log("slide change")}
+                  // >
+                  //   {results.map((anime, index) => (
+                  //     <SwiperSlide key={anime.mal_id} virtualIndex={index}>
+                  //       <AnimeCard anime={anime} />
+                  //     </SwiperSlide>
+                  //   ))}
+                  // </Swiper>
+                  <Row xs={1} sm={2} md={3} lg={4} className="g-4">
+                    {results.map((anime) => (
+                      <Col key={anime.mal_id}>
                         <AnimeCard anime={anime} />
-                      </SwiperSlide>
+                      </Col>
                     ))}
-                  </Swiper>
+                  </Row>
                 )}
               </Container>
             </div>
