@@ -8,13 +8,21 @@ import "../customCSS/AnimeDetail.css";
 
 const AnimeDetail = () => {
   const { id } = useParams();
+  const { theme, toggleTheme } = useTheme();
   const [anime, setAnime] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [episodes, setEpisodes] = useState([]);
+  // const [episodes, setEpisodes] = useState([]);
+  // const [loadingMore, setLoadingMore] = useState(false);
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const [totalPages, setTotalPages] = useState(null); // Track total pages
+  // const [hasMoreEpisodes, setHasMoreEpisodes] = useState(true);
 
-  const { theme, toggleTheme } = useTheme();
-  console.log(theme);
+  const [episodes, setEpisodes] = useState([]);
+  const [currentPage, setCurrentPage] = useState(null); // Start from the last page
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [hasMoreEpisodes, setHasMoreEpisodes] = useState(true);
+  // console.log(theme);
 
   useEffect(() => {
     const fetchAnimeDetail = async () => {
@@ -24,7 +32,7 @@ const AnimeDetail = () => {
           `https://api.jikan.moe/v4/anime/${id}/full`
         );
         setAnime(response.data.data);
-        console.log(response.data.data);
+        // console.log(response.data.data);
       } catch (error) {
         console.error("Error fetching anime details:", error);
         setError("Failed to load anime details. Please try again later.");
@@ -36,20 +44,61 @@ const AnimeDetail = () => {
     fetchAnimeDetail();
   }, [id]);
 
-  useEffect(() => {
-    const fetchEpisodes = async () => {
-      try {
-        const response = await axios.get(
-          `https://api.jikan.moe/v4/anime/${id}/videos/episodes`
-        );
-        setEpisodes(response.data.data); // Adjust based on API structure
-      } catch (error) {
-        console.error("Error fetching episodes:", error);
-      }
-    };
+  const fetchTotalPagesAndStart = async () => {
+    try {
+      // Fetch the first page to determine total pages
+      const response = await axios.get(
+        `https://api.jikan.moe/v4/anime/${id}/videos/episodes?page=1`
+      );
+      const totalPages = response.data.pagination.last_visible_page;
 
-    fetchEpisodes();
-  }, [id]);
+      setCurrentPage(totalPages); // Start fetching from the last page
+    } catch (error) {
+      console.error("Error fetching total pages:", error);
+    }
+  };
+
+  const fetchEpisodes = async (page) => {
+    setLoadingMore(true);
+    try {
+      const response = await axios.get(
+        `https://api.jikan.moe/v4/anime/${id}/videos/episodes?page=${page}`
+      );
+      const newEpisodes = response.data.data.reverse();
+
+      setEpisodes((prevEpisodes) => [
+        ...prevEpisodes,
+        ...newEpisodes, // Reverse episodes on the page to correct order
+      ]);
+
+      // Stop if there are no more pages
+      if (page <= 1) {
+        setHasMoreEpisodes(false);
+      }
+    } catch (error) {
+      console.error("Error fetching episodes:", error);
+    } finally {
+      setLoadingMore(false);
+    }
+  };
+
+  // On initial render, fetch total pages and start from the last page
+  useEffect(() => {
+    fetchTotalPagesAndStart();
+  }, []);
+
+  // Fetch episodes whenever the currentPage changes
+  useEffect(() => {
+    if (currentPage) {
+      fetchEpisodes(currentPage);
+    }
+  }, [currentPage]);
+
+  const handleLoadMore = () => {
+    if (hasMoreEpisodes && currentPage > 1) {
+      setCurrentPage((prevPage) => prevPage - 1);
+    }
+  };
 
   if (loading) {
     return (
@@ -157,7 +206,10 @@ const AnimeDetail = () => {
               <li key={episode.mal_id} className="episode-item">
                 {anime.images && anime.images.jpg.image_url && (
                   <img
-                    src={episode.images.jpg.image_url}
+                    src={
+                      episode.images.jpg.image_url ||
+                      anime.images.jpg.image_url
+                    }
                     alt={`Episode ${episode.mal_id}`}
                     className="episode-image"
                   />
@@ -171,6 +223,21 @@ const AnimeDetail = () => {
           </ul>
         ) : (
           <p>No episodes available</p>
+        )}
+
+        {hasMoreEpisodes && (
+          <div className="text-center mt-4">
+            {loadingMore ? (
+              <Spinner animation="border" variant="primary" />
+            ) : (
+              <Button onClick={handleLoadMore} variant="primary">
+                Load More Episodes
+              </Button>
+            )}
+          </div>
+        )}
+        {!hasMoreEpisodes && episodes.length > 0 && (
+          <p className="text-center text-muted">All episodes loaded.</p>
         )}
       </Container>
 
