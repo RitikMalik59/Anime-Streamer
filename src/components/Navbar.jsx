@@ -12,11 +12,14 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import ThemeToggleButton from "./ThemeToggleButton";
 import axios from "axios";
 import "../customCSS/Navbar.css"; // Custom CSS
+import { useTheme } from "../context/ThemeContext";
 
 const NavigationBar = () => {
   const [query, setQuery] = useState("");
   const [genres, setGenres] = useState([]);
   const navigate = useNavigate();
+  const { theme, toggleTheme } = useTheme();
+  console.log(theme);
 
   useEffect(() => {
     const fetchGenres = async () => {
@@ -39,7 +42,13 @@ const NavigationBar = () => {
     }
   };
   return (
-    <Navbar bg="dark" variant="dark" expand="lg" sticky="top" className="py-3">
+    <Navbar
+      bg={theme === "dark" ? "light" : "dark"}
+      variant={theme === "dark" ? "light" : "dark"}
+      expand="lg"
+      sticky="top"
+      className="py-3"
+    >
       <Container>
         <Navbar.Brand href="/">AnimeStream</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
