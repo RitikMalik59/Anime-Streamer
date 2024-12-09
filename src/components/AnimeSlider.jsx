@@ -20,7 +20,7 @@ const AnimeSlider = ({ categoryURL, animeTitle }) => {
   const [animeCategory, setAnimeCategory] = useState([]);
   const [loading, setLoading] = useState(true);
   const limit = 10;
-  console.log(categoryURL);
+  // console.log(categoryURL);
 
   useEffect(() => {
     // Fetch trending anime from Jikan API
@@ -76,8 +76,8 @@ const AnimeSlider = ({ categoryURL, animeTitle }) => {
             navigation
             pagination={{ clickable: true }}
             scrollbar={{ draggable: true }}
-            onSwiper={(swiper) => console.log(swiper)}
-            onSlideChange={() => console.log("slide change")}
+            // onSwiper={(swiper) => console.log(swiper)}
+            // onSlideChange={() => console.log("slide change")}
           >
             {animeCategory.map((anime, index) => (
               <SwiperSlide key={index} virtualIndex={index}>

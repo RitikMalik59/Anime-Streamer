@@ -180,7 +180,7 @@ body.light .anime-overlay {
 }
 
 .episode-image {
-  width: 50px; /* Adjust image size */
+  width: 90px; /* Adjust image size */
   height: auto;
   border-radius: 4px;
   margin-right: 1rem; /* Space between image and details */

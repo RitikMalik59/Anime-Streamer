@@ -5,7 +5,7 @@ import { Button } from "react-bootstrap";
 
 const ThemeToggleButton = () => {
   const { theme, toggleTheme } = useTheme();
-  console.log(theme);
+  // console.log(theme);
 
   return (
     <Button variant={theme === "dark" ? "light" : "dark"} onClick={toggleTheme}>

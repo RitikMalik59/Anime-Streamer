@@ -40,7 +40,7 @@ const AnimeDetail = () => {
     const fetchEpisodes = async () => {
       try {
         const response = await axios.get(
-          `https://api.jikan.moe/v4/anime/${id}/episodes`
+          `https://api.jikan.moe/v4/anime/${id}/videos/episodes`
         );
         setEpisodes(response.data.data); // Adjust based on API structure
       } catch (error) {
@@ -65,7 +65,7 @@ const AnimeDetail = () => {
     return <div className="text-danger text-center my-5">{error}</div>;
   }
 
-  // console.log(episodes);
+  console.log(episodes);
 
   return (
     <div className={`anime-detail ${theme}`}>
@@ -111,16 +111,17 @@ const AnimeDetail = () => {
               <strong>Status:</strong> {anime.status || "Unknown"}
             </p>
             <p>
-              <strong>Episodes:</strong> {anime.episodes}
+              <strong>Episodes:</strong> {anime.episodes || "Ongoing"}
             </p>
             <p>
               <strong>Rating:</strong> {anime.rating}
             </p>
             <p>
-              <strong>Producers:</strong>{" "}
-              {anime.producers.length > 0
-                ? anime.producers.map((prod) => prod.name).join(", ")
-                : "N/A"}
+              <strong>Score:</strong> {anime.score}
+            </p>
+            <p>
+              <strong>Season:</strong>{" "}
+              {anime.season + ", " + anime.year || "N/A"}
             </p>
           </Col>
           <Col md={6}>
@@ -132,7 +133,16 @@ const AnimeDetail = () => {
               <strong>Type:</strong> {anime.type}
             </p>
             <p>
-              <strong>Premiered:</strong> {anime.premiered}
+              <strong>Rank:</strong> {anime.rank}
+            </p>
+            <p>
+              <strong>Popularity:</strong> {anime.popularity}
+            </p>
+            <p>
+              <strong>Producers:</strong>{" "}
+              {anime.producers.length > 0
+                ? anime.producers.map((prod) => prod.name).join(", ")
+                : "N/A"}
             </p>
           </Col>
         </Row>
@@ -147,7 +157,7 @@ const AnimeDetail = () => {
               <li key={episode.mal_id} className="episode-item">
                 {anime.images && anime.images.jpg.image_url && (
                   <img
-                    src={anime.images.jpg.image_url}
+                    src={episode.images.jpg.image_url}
                     alt={`Episode ${episode.mal_id}`}
                     className="episode-image"
                   />
