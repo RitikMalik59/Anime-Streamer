@@ -5,6 +5,8 @@ import axios from "axios";
 import { Container, Row, Col, Spinner, Alert } from "react-bootstrap";
 import Banner from "../components/Banner";
 import AnimeCard from "../components/AnimeCard";
+import InfiniteScroll from "react-infinite-scroller";
+import Loader from "../components/Loader";
 
 const GenreListing = () => {
   const { genreId, genreName } = useParams(); // Capture genreId and genreName from route
@@ -35,11 +37,7 @@ const GenreListing = () => {
   }, [genreId]);
 
   if (loading) {
-    return (
-      <div className="text-center my-5">
-        <Spinner animation="border" variant="primary" />
-      </div>
-    );
+    <Loader />;
   }
 
   if (error) {
@@ -59,9 +57,7 @@ const GenreListing = () => {
           {/* <Button variant="primary">View All</Button> */}
         </div>
         {loading ? (
-          <div className="d-flex justify-content-center">
-            <Spinner animation="border" variant="primary" />
-          </div>
+          <Loader />
         ) : (
           <Row xs={1} sm={2} md={3} lg={4} className="g-4">
             {animeList.map((anime) => (

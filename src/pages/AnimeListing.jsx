@@ -4,7 +4,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import AnimeCard from "../components/AnimeCard";
 import Banner from "../components/Banner";
-import { Container, Row, Col, Button, Spinner } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
+import Loader from "../components/Loader";
 import config from "../config";
 
 const AnimeListing = () => {
@@ -48,9 +49,7 @@ const AnimeListing = () => {
           {/* <Button variant="primary">View All</Button> */}
         </div>
         {loading ? (
-          <div className="d-flex justify-content-center">
-            <Spinner animation="border" variant="primary" />
-          </div>
+          <Loader />
         ) : (
           <Row xs={1} sm={2} md={3} lg={4} className="g-4">
             {animeList.map((anime) => (

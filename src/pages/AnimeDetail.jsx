@@ -114,7 +114,7 @@ const AnimeDetail = () => {
     return <div className="text-danger text-center my-5">{error}</div>;
   }
 
-  console.log(episodes);
+  // console.log(episodes);
 
   return (
     <div className={`anime-detail ${theme}`}>
@@ -207,8 +207,7 @@ const AnimeDetail = () => {
                 {anime.images && anime.images.jpg.image_url && (
                   <img
                     src={
-                      episode.images.jpg.image_url ||
-                      anime.images.jpg.image_url
+                      episode.images.jpg.image_url || anime.images.jpg.image_url
                     }
                     alt={`Episode ${episode.mal_id}`}
                     className="episode-image"
