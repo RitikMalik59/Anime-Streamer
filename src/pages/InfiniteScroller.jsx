@@ -36,42 +36,18 @@ const GenreListing = () => {
     }
   };
 
-  const fetchAnimeWithRetry = async (page, retryCount = 3) => {
-    setLoading(true);
-    try {
-      const response = await axios.get(
-        `https://api.jikan.moe/v4/anime?genres=${genreId}&page=${page}&order_by=popularity&limit=5`
-      );
-      // setAnimeList(response.data.data);
-      const newAnime = response.data.data;
-
-      // Update the anime list and pagination state
-      setAnimeList((prevList) => [...prevList, ...newAnime]);
-      setHasMoreAnime(response.data.pagination.has_next_page); // Update if more pages exist
-      setLoading(false);
-    } catch (err) {
-      if (retryCount > 0 && err.response && err.response.status === 429) {
-        console.warn("Rate limited. Retrying...");
-        setTimeout(() => fetchAnimeWithRetry(retryCount - 1), 3000); // Retry after 3 seconds
-      } else {
-        console.error("Failed to fetch data:", err);
-        setError("Failed to load anime for this genre.");
-        setLoading(false);
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const loadMoreAnime = () => {
-    // console.log("loading:" + loading);
-    // console.log("hasMoreAnime:" + hasMoreAnime);
+    console.log("loading:" + loading);
+    console.log("hasMoreAnime:" + hasMoreAnime);
+    // console.log(hasMoreAnime);
 
     if (!loading && hasMoreAnime) {
       setTimeout(() => {
+        // setrecords(records + itemsPerPage);
         setCurrentPage((prevPage) => prevPage + 1);
-        // console.log(currentPage);
-      }, 3000);
+        console.log(currentPage);
+        //(posts.length-records)>10? setrecords(records + 10):setrecords(records+15);
+      }, 1000);
     }
   };
 
@@ -85,9 +61,7 @@ const GenreListing = () => {
   useEffect(() => {
     // Fetch anime whenever the current page changes
     if (currentPage > 0) {
-      fetchAnimeWithRetry(currentPage);
-      // fetchAnime(currentPage);
-      console.log("fetching page:" + currentPage);
+      fetchAnime(currentPage);
     }
   }, [currentPage]);
 
@@ -99,7 +73,6 @@ const GenreListing = () => {
     );
   }
 
-  // console.log(animeList.length);
   return (
     <>
       <Banner />
@@ -108,7 +81,7 @@ const GenreListing = () => {
           <h2>Anime under {genreName}</h2>
         </div>
         <InfiniteScroll
-          pageStart={0} // Starts loading from page 0
+          // pageStart={0} // Starts loading from page 0
           loadMore={loadMoreAnime} // Triggered when the user scrolls near the bottom
           hasMore={hasMoreAnime} // Determines if further data should be loaded
           loader={
@@ -125,7 +98,7 @@ const GenreListing = () => {
             ))}
           </Row>
         </InfiniteScroll>
-        {/* {loading && <Loader />} Show initial loader */}
+        {loading && currentPage === 1 && <Loader />} {/* Show initial loader */}
       </Container>
     </>
   );

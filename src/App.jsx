@@ -36,6 +36,7 @@ const App = () => {
             </>
           }
         />
+        {/* <Route path="/infinite" element={<InfiniteScroller />} /> */}
         <Route path="/*" element={<NoPage />} />
         {/* Future routes can be added here */}
       </Routes>
