@@ -38,9 +38,10 @@ const GenreListing = () => {
 
   const fetchAnimeWithRetry = async (page, retryCount = 3) => {
     setLoading(true);
+    const limit = 10;
     try {
       const response = await axios.get(
-        `https://api.jikan.moe/v4/anime?genres=${genreId}&page=${page}&order_by=popularity&limit=5`
+        `https://api.jikan.moe/v4/anime?genres=${genreId}&page=${page}&order_by=popularity&limit=${limit}`
       );
       // setAnimeList(response.data.data);
       const newAnime = response.data.data;
